@@ -153,7 +153,17 @@ cd frontend
 npm run dev
 ```
 
-Visit **`http://localhost:5173`** in your browser.
+Visit **`http://localhost:5173`** (or `http://127.0.0.1:5173`) in your browser.
+
+### Deployed & Local Environments
+
+| Environment | Frontend | Backend API |
+| :--- | :--- | :--- |
+| **Production** | `https://ai-shoppers.pages.dev` | `https://ai-shopeprs.onrender.com/api` |
+| **Local Development** | `http://localhost:5173` / `http://127.0.0.1:5173` | `http://localhost:5000/api` |
+
+- **Backend CORS (`FRONTEND_URL` / `CORS_ORIGINS`)**: Accepts comma-separated origins (e.g. `http://localhost:5173,http://127.0.0.1:5173,https://ai-shoppers.pages.dev`). Both production (`https://ai-shoppers.pages.dev`, plus `*.ai-shoppers.pages.dev` preview builds) and localhost origins are allowed by default.
+- **Frontend API Resolution (`VITE_API_BASE_URL`)**: Automatically selects `http://localhost:5000/api` on `localhost`/`127.0.0.1` or Vite dev mode, and `https://ai-shopeprs.onrender.com/api` in production unless overridden via `VITE_API_BASE_URL`.
 
 ---
 

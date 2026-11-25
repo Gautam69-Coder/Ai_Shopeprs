@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Activity, RefreshCw, Server, Database, CheckCircle2, AlertCircle, Cpu, Zap } from 'lucide-react';
 import { Card } from '../common/Card';
 import { Badge } from '../common/Badge';
+import { API_BASE_URL, BACKEND_ORIGIN } from '../../config/api';
 import type { HealthResponse } from '../../types/health';
 
 export const SystemStatus: React.FC = () => {
@@ -13,7 +14,7 @@ export const SystemStatus: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://localhost:5000/api/health', {
+      const response = await fetch(`${API_BASE_URL}/health`, {
         headers: { 'Accept': 'application/json' },
       });
       if (!response.ok) {
@@ -75,15 +76,15 @@ export const SystemStatus: React.FC = () => {
             {error ? (
               <Badge variant="warning" dot>Offline / Unreachable</Badge>
             ) : health?.status === 'ok' ? (
-              <Badge variant="success" dot>Active (Port 5000)</Badge>
+              <Badge variant="success" dot>Active</Badge>
             ) : (
               <Badge variant="neutral">Connecting...</Badge>
             )}
           </div>
           <p className="text-xs text-slate-500">
             {error
-              ? 'Start the backend using npm run dev in backend/'
-              : `Express 4 (ES Modules) — Uptime: ${health?.uptime ?? 0}s`}
+              ? `Unable to reach ${BACKEND_ORIGIN}. Ensure the backend server is running.`
+              : `Express 4 (${BACKEND_ORIGIN}) — Uptime: ${health?.uptime ?? 0}s`}
           </p>
         </div>
 
@@ -120,7 +121,9 @@ export const SystemStatus: React.FC = () => {
                 Frontend Client
               </span>
             </div>
-            <Badge variant="success" dot>Port 5173</Badge>
+            <Badge variant="success" dot>
+              {typeof window !== 'undefined' ? window.location.host : 'Active'}
+            </Badge>
           </div>
           <p className="text-xs text-slate-500">
             React 19 + TypeScript + Vite + Tailwind CSS
@@ -192,7 +195,7 @@ export const SystemStatus: React.FC = () => {
         <div className="mt-4 p-3 rounded-lg bg-amber-50 border border-amber-200 flex items-center gap-2 text-xs text-amber-800">
           <AlertCircle className="w-4 h-4 shrink-0 text-amber-600" aria-hidden="true" />
           <span>
-            Notice: Backend server is currently not responding on http://localhost:5000. Start backend with <code className="font-mono font-semibold bg-amber-100 px-1 py-0.5 rounded">npm run dev</code> in the backend folder.
+            Notice: Backend server is currently not responding on {BACKEND_ORIGIN}. If running locally, start backend with <code className="font-mono font-semibold bg-amber-100 px-1 py-0.5 rounded">npm run dev</code> in the backend folder.
           </span>
         </div>
       )}

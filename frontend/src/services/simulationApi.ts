@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config/api';
 import type {
   RunSimulationRequest,
   RunSimulationResponse,
@@ -5,8 +6,6 @@ import type {
   GetSimulationByIdResponse,
   EvaluateSimulationResponse,
 } from '../types/simulation';
-
-const API_BASE_URL = 'http://localhost:5000/api';
 
 /**
  * Runs a product simulation across a cohort of synthetic shoppers

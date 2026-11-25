@@ -1,11 +1,9 @@
+import { API_BASE_URL } from '../config/api';
 import type {
   GetPlatformOverviewResponse,
   GetSimulationAnalyticsResponse,
   GetComparisonResponse,
 } from '../types/analytics';
-
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
 /**
  * Fetches platform-wide aggregate KPI metrics across all tested cohorts

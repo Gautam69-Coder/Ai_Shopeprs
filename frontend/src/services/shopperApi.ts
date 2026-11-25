@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config/api';
 import type {
   GenerateShoppersRequest,
   GenerateShoppersResponse,
@@ -5,8 +6,6 @@ import type {
   GetBatchesResponse,
   SyntheticShopper,
 } from '../types/shopper';
-
-const API_BASE_URL = 'http://localhost:5000/api';
 
 /**
  * Triggers synthetic shopper profile generation via Groq LLM
